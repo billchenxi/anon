@@ -32,6 +32,16 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# Local MVP store. Any json under data/, not just the default name — a stale
+# copy ("store 2.json") held plaintext World ID nullifiers from before the
+# migration and was one `git add` away from being published.
+/data/*.json
+
+# Finder and cloud-sync duplicates ("name 2.ext"). Never intentional, and they
+# carry whatever the original held at the time it was copied.
+* [0-9].*
 
 # vercel
 .vercel
@@ -39,3 +49,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Kept out of the public repo for now: the grant application, the launch
+# blocker list, the build history and the design exports. They live on disk
+# and are simply untracked — delete these four lines to publish them.
+/GRANT.md
+/SHIPPING.md
+/WORKLOG.md
+/design/
