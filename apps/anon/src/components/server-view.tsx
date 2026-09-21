@@ -63,6 +63,21 @@ export function ServerViewPanel({ view }: { view: ServerView }) {
           </div>
         ))}
       </dl>
+
+      {/* Deliberately below the counted rows and visually separate: everything
+          above is measured from the store, this is a fact about the protocol.
+          Mixing an assertion in with the counts would weaken both. */}
+      <div className="mt-5 border-t border-rule pt-4">
+        <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-ink-3">
+          Outside Anon
+        </p>
+        <p className="mt-1.5 text-[12.5px] leading-5 text-ink-2">
+          Verifying sends your proof to World, so World sees it and knows which
+          app asked. What they keep is their policy, not ours. Everything above
+          is what <span className="font-medium text-ink">this</span> server
+          holds &mdash; it cannot speak for anyone else.
+        </p>
+      </div>
     </section>
   );
 }

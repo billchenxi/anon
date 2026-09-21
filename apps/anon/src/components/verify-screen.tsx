@@ -85,6 +85,11 @@ export function VerifyScreen({
         {worldIdConfigured ? (
           <>
             <WorldIdGate enabled={!busy} onVerified={onWorldId} primary />
+            <p className="px-2 text-center text-[12px] leading-5 text-ink-3">
+              Verifying sends a proof to World. They see that an app asked;
+              they do not see anything you go on to write here. Anon never
+              learns your name either way.
+            </p>
             {demoAllowed && (
               <Button
                 variant="quiet"
