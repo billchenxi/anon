@@ -28,6 +28,31 @@ the rule it enforces.
 Nothing stores a nullifier. Everything stores `sha256` of one, per action, or
 stores nothing at all.
 
+## Accountability without identity
+
+Anon holds people to account. It cannot name them, and neither can anyone else.
+
+The same person always produces the same key for the same rule, so consequences
+stick: a mute survives a new face, one person gets one ballot, one person gets
+one voice in a thread. That is real accountability &mdash; you cannot walk away
+from what you did by making another account.
+
+What it is not is traceability. A World ID nullifier is an opaque value scoped
+to this app. It is not a name, an email or a document number, and it cannot be
+turned into one. A full dump of this database shows that Quiet Harbor posted
+about bonuses; nothing in it, or reachable from it, says who Quiet Harbor is.
+
+So the answer to "can you identify this user" is **no**, and it stays no under
+a subpoena, because the information was never collected. A product that wanted
+a different answer would need its own identity layer &mdash; government ID, a
+payment method, a phone number &mdash; and would stop being this product.
+
+One thing the in-app ledger does not cover: proofs are verified server-side
+through World's endpoint, so World sees the nullifier and the app id at
+verification time. What they retain is their policy, not something this code
+controls. The panel is honest about what *this* server holds; it cannot speak
+for a third party.
+
 ## Where this is going
 
 Today a Surrogate only exists inside Anon. The intent is that it becomes a face
