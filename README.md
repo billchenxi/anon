@@ -31,9 +31,23 @@ stores nothing at all.
 ## Where this is going
 
 Today a Surrogate only exists inside Anon. The intent is that it becomes a face
-you can wear anywhere &mdash; an AI assistant, a clinic&rsquo;s support forum, a
-dating or cruising site &mdash; without any of them learning that the others
-exist.
+you can wear anywhere &mdash; the AI assistant at work, a clinic&rsquo;s support
+forum, a dating or cruising site &mdash; without any of them learning that the
+others exist.
+
+The clearest case is the one next to the flagship room. Companies are putting AI
+assistants in front of every employee, and logging every prompt against a name.
+So nobody asks the thing they actually want to ask: *am I being managed out*,
+*is this rate normal for my band*, *how do I report my manager*. It is the Slack
+problem again, in a new box &mdash; the tool is there, and the honest question
+never gets typed into it.
+
+An anonymous lane fixes it without giving up control. The employer learns that
+**a verified member of staff** asked, which is what stops an outsider spending
+their token budget, and does not learn **which one**. Every piece that needs is
+already built: personhood for "works here", a per-action nullifier for a
+per-person quota with no identity attached, a sealed Surrogate for the handle,
+and mutes that follow the human for abuse.
 
 The primitive for that is already here. A **sealed** Surrogate keeps its private
 key on your device and signs each action; the server stores only a public key.
