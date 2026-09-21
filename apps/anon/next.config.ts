@@ -9,7 +9,10 @@ const nextConfig: NextConfig = {
   // exact path only, so /site would 404 without this — and /site/index.html is
   // not a URL to put in a form.
   async rewrites() {
-    return [{ source: "/site", destination: "/site/index.html" }];
+    return [
+      { source: "/site", destination: "/site/index.html" },
+      { source: "/site/support", destination: "/site/support/index.html" },
+    ];
   },
   // The dev overlay sits bottom-left, on top of the tab bar. Errors still
   // surface without it, and demo screenshots stay clean.
