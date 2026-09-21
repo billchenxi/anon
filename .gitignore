@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# Dependencies and build output, at any depth: pnpm gives every workspace
+# package its own node_modules, and every app its own .next.
+node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -11,14 +12,14 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
@@ -34,10 +35,11 @@ yarn-error.log*
 .env*
 !.env.example
 
-# Local MVP store. Any json under data/, not just the default name — a stale
-# copy ("store 2.json") held plaintext World ID nullifiers from before the
-# migration and was one `git add` away from being published.
-/data/*.json
+# Local MVP store. Any json under any data/ directory, at any depth — the
+# rule used to be root-anchored, and moving the app into apps/anon silently
+# un-ignored the live store. A stale copy of it once held plaintext World ID
+# nullifiers.
+**/data/*.json
 
 # Finder and cloud-sync duplicates ("name 2.ext"). Never intentional, and they
 # carry whatever the original held at the time it was copied.

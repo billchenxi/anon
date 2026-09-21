@@ -1,32 +1,12 @@
 {
-  "name": "anon",
-  "version": "0.1.0",
+  "name": "anon-workspace",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "test": "vitest run"
-  },
-  "dependencies": {
-    "@worldcoin/idkit": "^4.2.3",
-    "@worldcoin/minikit-js": "^2.0.3",
-    "next": "16.3.5",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "viem": "^2.56.8"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.3.5",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^5.0.1"
+    "dev": "pnpm --filter anon dev",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter anon start",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
   },
   "packageManager": "pnpm@10.22.0"
 }

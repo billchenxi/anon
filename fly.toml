@@ -1,0 +1,42 @@
+# Anon on Fly.io.
+#
+# One machine, one volume. The MVP store is a single JSON file, so a second
+# machine would get its own copy and votes, mutes and rate limits would all
+# diverge. Do not scale past one until `src/lib/store.ts` speaks to a database.
+
+app = "CHANGE-ME"          # must be globally unique on Fly
+primary_region = "sjc"     # pick the one nearest your users
+
+[build]
+  [build.args]
+    # NEXT_PUBLIC_* is inlined into the browser bundle at build time, so it has
+    # to be here rather than in [env]. It is a public value.
+    NEXT_PUBLIC_WORLD_APP_ID = "app_2be67dfca9cf838fc9469c76eb5b5ef8"
+
+[env]
+  ANON_STORE_PATH = "/data/store.json"
+  WORLD_ID_APP_ID = "app_2be67dfca9cf838fc9469c76eb5b5ef8"
+  WORLD_ID_RP_ID = "rp_acde33d3e331bd9b"
+  WORLD_ID_ACTION = "anon-verify"
+  PORT = "3000"
+
+# Secrets are NOT set here. Use `fly secrets set` — see DEPLOY.md.
+#   RP_SIGNING_KEY, SESSION_SECRET, ANON_ID_PEPPER
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 1
+  # Hard ceiling: the JSON store cannot be shared between machines.
+  max_machines_running = 1
+
+[[mounts]]
+  source = "anon_data"
+  destination = "/data"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
