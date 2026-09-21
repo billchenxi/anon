@@ -44,6 +44,48 @@ verification a trust signal rather than a gate, or you exclude exactly the
 people most at risk. And get counsel before shipping into a regulated health
 setting.
 
+## What a host site implements
+
+Three calls, and the host keeps its own accounts, sessions and UI. Nothing
+about their user model changes.
+
+```ts
+// 1. Their user taps "Verify you're human".
+//    IDKit opens World App; the proof comes back to their frontend.
+const proof = await idkit.prove(`standing-${SCOPE}`);
+
+// 2. Their backend checks the person is not barred, and marks the account.
+const res = await fetch("/api/gate/enter", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({ scope: SCOPE, proof }),
+});
+
+if (res.status === 403) return showBarred();        // ban survived a new account
+const { capability } = await res.json();            // 10 minutes, no identifier
+
+// 3. They set a flag on their own account row. That is the whole schema change.
+await db.users.update(userId, { humanVerified: true });
+```
+
+To bar someone, their moderator tool calls `POST /api/gate/standing` with the
+reporter's proof. To gate a one-per-person perk, `POST /api/gate/claim`.
+
+## Who should run this
+
+**They should — not you.** Register the World ID app under their name, run this
+code on their infrastructure, keep the ledger in their database.
+
+Nullifiers are scoped per app_id. If several sites shared one deployment, one
+operator could link the same person across all of them — the exact
+cross-service linkage World ID otherwise prevents. Running it themselves also
+keeps user proofs off a third party, which removes most of the legal
+conversation before it starts.
+
+That makes this a library and an integration, not a service in the middle. It is
+a worse business and a much better privacy story, and for this category the
+privacy story is the product.
+
 ## Storage
 
 `src/lib/ledger.ts` is an in-memory Map, deliberately. The shape is the point;
