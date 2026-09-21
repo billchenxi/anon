@@ -15,7 +15,8 @@
      hairlines, and the only thing that inverts is consequence. */
   :root {
     --paper: #ffffff;
-    --paper-3: #f4f4f5;
+    --paper-2: #fafafa;
+    --paper-3: #f2f2f3;
     --ink: #0d0d0d;
     --ink-2: #4a4a4a;
     --ink-3: #6b6b6b;
@@ -26,14 +27,14 @@
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
@@ -41,70 +42,103 @@
   img { max-width: 100%; display: block; }
   a { color: var(--ink); }
 
-  .wrap {
-    max-width: 960px;
-    margin: 0 auto;
-    padding-inline: 24px;
-  }
-
-  .display { font-family: var(--display); letter-spacing: -0.02em; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-inline: 24px; }
+  .narrow { max-width: 760px; margin: 0 auto; padding-inline: 24px; }
 
   .eyebrow {
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-3);
     margin: 0;
   }
 
-  /* ----------------------------------------------------------------- hero */
+  /* ------------------------------------------------------------ the device
+     A believable phone rather than a bare screenshot: black bezel, rounded
+     screen, a soft shadow to lift it off the page, and the speaker pill. */
 
-  header { padding-block: clamp(56px, 10vw, 104px) clamp(40px, 7vw, 72px); }
+  .device {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(300px, 74vw);
+    padding: 11px;
+    border-radius: 46px;
+    background: var(--ink);
+    box-shadow:
+      0 2px 4px rgba(13, 13, 13, 0.06),
+      0 24px 50px -18px rgba(13, 13, 13, 0.32);
+  }
 
-  .mark { width: 76px; height: 76px; }
+  .device img {
+    border-radius: 35px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 780 / 1688;
+    background: var(--paper);
+  }
+
+  .device::after {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 62px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--ink);
+  }
+
+  .device.lg { width: min(330px, 78vw); }
+
+  /* ------------------------------------------------------------------ hero */
+
+  header { padding-block: clamp(56px, 9vw, 96px) clamp(48px, 8vw, 88px); }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .mark { width: 68px; height: 68px; }
 
   h1 {
     font-family: var(--display);
-    font-size: clamp(52px, 12vw, 104px);
+    font-size: clamp(56px, 9vw, 96px);
     font-weight: 600;
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    margin: 28px 0 0;
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    margin: 26px 0 0;
   }
 
   .tagline {
     font-family: var(--display);
     font-style: italic;
-    font-size: clamp(21px, 4.2vw, 30px);
-    line-height: 1.25;
+    font-size: clamp(22px, 3.4vw, 32px);
+    line-height: 1.22;
     color: var(--ink-2);
-    margin: 18px 0 0;
-    max-width: 18ch;
+    margin: 20px 0 0;
+    max-width: 17ch;
   }
 
   .lede {
-    margin: 26px 0 0;
-    max-width: 54ch;
-    font-size: clamp(16px, 2.2vw, 18px);
+    margin: 24px 0 0;
+    max-width: 46ch;
     color: var(--ink-2);
   }
 
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    height: 48px;
-    padding-inline: 22px;
+    height: 52px;
+    padding-inline: 26px;
     border-radius: 999px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     text-decoration: none;
     transition: background 0.15s, color 0.15s;
@@ -112,272 +146,289 @@
 
   .btn-primary { background: var(--ink); color: var(--paper); }
   .btn-primary:hover { background: var(--ink-2); }
-  .btn-secondary { border: 1px solid var(--rule-strong); color: var(--ink); }
+  .btn-secondary { border: 1px solid var(--rule-strong); }
   .btn-secondary:hover { background: var(--paper-3); }
 
-  /* ---------------------------------------------------------------- rules */
+  /* -------------------------------------------------------------- sections */
 
-  section { padding-block: clamp(44px, 7vw, 76px); border-top: 1px solid var(--rule); }
+  section { padding-block: clamp(56px, 9vw, 104px); }
+  section + section { border-top: 1px solid var(--rule); }
 
   h2 {
     font-family: var(--display);
-    font-size: clamp(27px, 4.4vw, 38px);
+    font-size: clamp(32px, 5vw, 46px);
     font-weight: 600;
-    line-height: 1.12;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin: 14px 0 0;
+    text-wrap: balance;
+  }
+
+  .section-lede { margin: 18px 0 0; max-width: 56ch; color: var(--ink-2); }
+
+  /* ------------------------------------------------------------- features
+     Alternating rows. The image leads on a wide screen, the copy leads when
+     it stacks, so reading order stays sensible either way. */
+
+  .feature {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .feature + .feature { margin-top: clamp(56px, 9vw, 104px); }
+  .feature:nth-child(even) { grid-template-columns: minmax(0, 1fr) auto; }
+  .feature:nth-child(even) .device { order: 2; }
+
+  .feature h3 {
+    font-family: var(--display);
+    font-size: clamp(25px, 3.4vw, 34px);
+    font-weight: 600;
+    line-height: 1.14;
     letter-spacing: -0.025em;
     margin: 12px 0 0;
     text-wrap: balance;
   }
 
-  .section-lede { margin: 16px 0 0; max-width: 58ch; color: var(--ink-2); }
+  .feature p { margin: 14px 0 0; max-width: 42ch; color: var(--ink-2); }
+
+  /* ---------------------------------------------------------------- rules */
 
   .rules {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* Exactly three, because there are exactly three rules. auto-fit gave two
+       columns and left a fourth cell empty, which showed as a grey box. */
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--rule);
     border: 1px solid var(--rule);
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    margin-top: 32px;
+    margin-top: 44px;
   }
 
-  .rule { background: var(--paper); padding: 24px 22px; }
+  .rule { background: var(--paper); padding: 30px 26px; }
   .rule .scope {
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-3);
   }
   .rule h3 {
     font-family: var(--display);
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    margin: 8px 0 0;
-    letter-spacing: -0.015em;
+    margin: 10px 0 0;
+    letter-spacing: -0.02em;
   }
-  .rule p { margin: 10px 0 0; font-size: 14.5px; color: var(--ink-2); }
+  .rule p { margin: 12px 0 0; font-size: 15.5px; color: var(--ink-2); }
 
-  /* -------------------------------------------------------------- screens */
+  /* --------------------------------------------------------------- ledger */
 
-  .screens {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 28px 22px;
-    margin-top: 34px;
-  }
-
-  figure { margin: 0; }
-  .frame {
-    border: 1px solid var(--rule);
-    border-radius: 20px;
-    overflow: hidden;
-    background: var(--paper);
-  }
-  figcaption { margin-top: 12px; font-size: 13.5px; color: var(--ink-3); }
-  figcaption b { display: block; color: var(--ink); font-weight: 500; }
-
-  /* --------------------------------------------------------------- honest */
-
-  /* Ledger text and the screenshot of it, side by side on a wide screen. */
-  .honest-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 210px;
-    gap: 40px;
-    align-items: start;
-    margin-top: 30px;
-  }
-  .honest-wrap .shot { margin: 0; }
-  @media (max-width: 720px) {
-    .honest-wrap { grid-template-columns: 1fr; gap: 28px; }
-    .honest-wrap .shot { max-width: 230px; }
-  }
-
-  .ledger { border-top: 1px solid var(--rule); }
+  .ledger { border-top: 1px solid var(--rule); margin-top: 34px; }
   .row {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    gap: 8px 20px;
-    padding-block: 15px;
+    gap: 6px 24px;
+    padding-block: 18px;
     border-bottom: 1px solid var(--rule);
   }
-  .row span:first-child { font-size: 15.5px; }
-  .row .val { font-size: 13px; font-weight: 500; color: var(--ink-3); }
+  .row .val { font-size: 14px; font-weight: 500; color: var(--ink-3); }
   /* Inversion is reserved for the one thing that is a real cost. */
   .row .val.kept {
     background: var(--ink);
     color: var(--paper);
-    border-radius: 5px;
-    padding: 2px 9px;
+    border-radius: 6px;
+    padding: 3px 10px;
   }
 
   /* --------------------------------------------------------------- footer */
 
   footer {
     border-top: 1px solid var(--rule);
-    padding-block: 40px 64px;
+    padding-block: 48px 72px;
     color: var(--ink-3);
-    font-size: 14px;
+    font-size: 15px;
   }
-  footer p { margin: 0 0 8px; max-width: 62ch; }
+  footer p { margin: 0 0 10px; max-width: 64ch; }
   footer a { text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
 
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.88em;
-    background: var(--paper-3);
-    border: 1px solid var(--rule);
-    border-radius: 5px;
-    padding: 1px 6px;
+  @media (max-width: 720px) {
+    .rules { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 860px) {
+    .hero, .feature, .feature:nth-child(even) { grid-template-columns: 1fr; }
+    .hero .device, .feature .device, .feature:nth-child(even) .device {
+      order: 2;
+      margin-top: 8px;
+    }
+    .tagline, .lede, .feature p { max-width: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
     * { transition: none !important; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header>
-    <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Anon">
-      <path d="M32 6c12 0 20 9 20 23 0 17-9 29-20 29S12 46 12 29C12 15 20 6 32 6Z" fill="#0d0d0d"/>
-      <path d="M21 27c3.5-2.5 18.5-2.5 22 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-    </svg>
-    <h1 class="display">Anon</h1>
-    <p class="tagline">Prove you&rsquo;re human, not who you are.</p>
-    <p class="lede">
-      A World Mini App for the conversations you cannot have under your own
-      name. World ID verifies the person once. A <b>Surrogate</b> is the face
-      they wear in a room &mdash; and the room only ever sees the face.
-    </p>
-    <div class="actions">
-      <a class="btn btn-primary" href="https://world.org/mini-app?app_id=app_2be67dfca9cf838fc9469c76eb5b5ef8">
-        Open in World App
-      </a>
-      <a class="btn btn-secondary" href="https://github.com/billchenxi/anon">
-        Read the source
-      </a>
-    </div>
-  </header>
-
-  <section>
-    <p class="eyebrow">The problem</p>
-    <h2>Anonymity is not the scarce resource.</h2>
-    <p class="section-lede">
-      Burner accounts are free. What is scarce is anonymity a room can
-      <em>trust</em> &mdash; where the reader knows a distinct real person is
-      speaking, and the speaker knows that is all the reader learns.
-    </p>
-    <p class="section-lede">
-      Ask about your bonus, your rating, or your manager. Nobody learns your
-      name. Everybody knows you are one real person, speaking once.
-    </p>
-  </section>
-
-  <section>
-    <p class="eyebrow">How it holds up</p>
-    <h2>Three rules, all keyed on the person &mdash; never the username.</h2>
-    <div class="rules">
-      <div class="rule">
-        <span class="scope">Per poll</span>
-        <h3>One human, one vote</h3>
-        <p>A second Surrogate from the same person cannot recast a ballot.</p>
-      </div>
-      <div class="rule">
-        <span class="scope">Per thread</span>
-        <h3>One human, one voice</h3>
-        <p>Nobody becomes a crowd agreeing with itself.</p>
-      </div>
-      <div class="rule">
-        <span class="scope">Per room</span>
-        <h3>Mutes follow the human</h3>
-        <p>A fresh face does not clear a consequence the person earned.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <p class="eyebrow">The app</p>
-    <h2>Built, not mocked up.</h2>
-    <p class="section-lede">
-      Every screen below is the running app against a live store.
-    </p>
-    <div class="screens">
-      <figure>
-        <div class="frame"><img src="screens/01-verify.png" alt="Anon sign-in screen" width="780" height="1688" loading="lazy"></div>
-        <figcaption><b>Verify once</b>World ID proves the person, not the profile.</figcaption>
-      </figure>
-      <figure>
-        <div class="frame"><img src="screens/08-feed-work.png" alt="Workplace room feed" width="780" height="1688" loading="lazy"></div>
-        <figcaption><b>Rooms</b>Workplace, Health, Commons &mdash; a different face in each.</figcaption>
-      </figure>
-      <figure>
-        <div class="frame"><img src="screens/10-thread.png" alt="A discussion thread" width="780" height="1688" loading="lazy"></div>
-        <figcaption><b>Threads</b>Three replies, three verified people, no names.</figcaption>
-      </figure>
-      <figure>
-        <div class="frame"><img src="screens/12-ballots.png" alt="A poll" width="780" height="1688" loading="lazy"></div>
-        <figcaption><b>Ballots</b>Each poll declares its own uniqueness rule.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section>
-    <p class="eyebrow">The honest part</p>
-    <h2>What the server can still see.</h2>
-    <p class="section-lede">
-      A privacy app that only lists what it does not collect is asking to be
-      taken on faith. Anon shows you the real number instead.
-    </p>
-    <div class="honest-wrap">
+<header class="wrap">
+  <div class="hero">
     <div>
-    <div class="ledger">
-      <div class="row">
-        <span>Your World ID nullifier</span>
-        <span class="val">Never written &mdash; used once, then discarded</span>
-      </div>
-      <div class="row">
-        <span>Ballots</span>
-        <span class="val">Keyed per poll, so they cannot become a history</span>
-      </div>
-      <div class="row">
-        <span>Linked Surrogates grouped under you</span>
-        <span class="val kept">A real link</span>
-      </div>
-      <div class="row">
-        <span>Sealed Surrogates</span>
-        <span class="val">Key held on your device &mdash; not groupable at all</span>
+      <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Anon">
+        <path d="M32 6c12 0 20 9 20 23 0 17-9 29-20 29S12 46 12 29C12 15 20 6 32 6Z" fill="#0d0d0d"/>
+        <path d="M21 27c3.5-2.5 18.5-2.5 22 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <h1>Anon</h1>
+      <p class="tagline">Prove you&rsquo;re human, not who you are.</p>
+      <p class="lede">
+        A World Mini App for the conversations you cannot have under your own
+        name. World ID verifies the person once. A <b>Surrogate</b> is the face
+        they wear in a room &mdash; and the room only ever sees the face.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/billchenxi/anon">See how it works</a>
+        <a class="btn btn-secondary" href="#rules">The three rules</a>
       </div>
     </div>
-    <p class="section-lede" style="margin-top:22px">
-      A <b>sealed</b> Surrogate keeps its private key on one phone and signs
-      every action. The server stores only a public key and cannot tell that
-      face from a stranger&rsquo;s. The cost is stated plainly in the app: lose
-      the phone, lose the face.
-    </p>
+    <div class="device lg">
+      <img src="screens/08-feed-work.png" alt="The Workplace room in Anon" width="780" height="1688">
     </div>
-    <figure class="shot">
-      <div class="frame"><img src="screens/15-faces-ledger.png" alt="The What this server can see panel in the app" width="780" height="1688" loading="lazy"></div>
-      <figcaption><b>In the app</b>The same numbers, counted live.</figcaption>
-    </figure>
-    </div>
-  </section>
+  </div>
+</header>
 
-  <footer>
-    <p>
-      Anon is an independent prototype. It is not affiliated with, endorsed by,
-      or operated by World, Tools for Humanity, or the World Foundation.
-    </p>
-    <p>
-      Source: <a href="https://github.com/billchenxi/anon">github.com/billchenxi/anon</a>
-      &middot; Built with World ID 4.0 and MiniKit.
-    </p>
-  </footer>
-</div>
+<section class="narrow">
+  <p class="eyebrow">The problem</p>
+  <h2>Anonymity is not the scarce resource.</h2>
+  <p class="section-lede">
+    Burner accounts are free. What is scarce is anonymity a room can
+    <em>trust</em> &mdash; where the reader knows a distinct real person is
+    speaking, and the speaker knows that is all the reader learns.
+  </p>
+  <p class="section-lede">
+    Ask about your bonus, your rating, or your manager. Nobody learns your
+    name. Everybody knows you are one real person, speaking once.
+  </p>
+</section>
+
+<section class="narrow" id="rules">
+  <p class="eyebrow">How it holds up</p>
+  <h2>Three rules, all keyed on the person &mdash; never the username.</h2>
+  <div class="rules">
+    <div class="rule">
+      <span class="scope">Per poll</span>
+      <h3>One human, one vote</h3>
+      <p>A second Surrogate from the same person cannot recast a ballot.</p>
+    </div>
+    <div class="rule">
+      <span class="scope">Per thread</span>
+      <h3>One human, one voice</h3>
+      <p>Nobody becomes a crowd agreeing with itself.</p>
+    </div>
+    <div class="rule">
+      <span class="scope">Per room</span>
+      <h3>Mutes follow the human</h3>
+      <p>A fresh face does not clear a consequence the person earned.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="feature">
+    <div class="device">
+      <img src="screens/01-verify.png" alt="Anon sign-in screen" width="780" height="1688" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow">Verify once</p>
+      <h3>World ID proves the person, not the profile.</h3>
+      <p>
+        One tap inside World App. Anon derives a handle from the proof and
+        discards the rest &mdash; your nullifier is never written down.
+      </p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="device">
+      <img src="screens/10-thread.png" alt="A discussion thread in Anon" width="780" height="1688" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow">Rooms and threads</p>
+      <h3>Three replies. Three verified people. No names.</h3>
+      <p>
+        Workplace, Health and Commons, each with a different face. The first
+        Surrogate you speak with in a thread is the only one you can speak with
+        there.
+      </p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="device">
+      <img src="screens/12-ballots.png" alt="A poll in Anon" width="780" height="1688" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow">Ballots</p>
+      <h3>Every poll declares its own rule.</h3>
+      <p>
+        One ballot per person, or one per face &mdash; stated before you vote.
+        Switching Surrogates does not buy a second vote.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="feature">
+    <div class="device">
+      <img src="screens/15-faces-ledger.png" alt="The What this server can see panel" width="780" height="1688" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow">The honest part</p>
+      <h3>What the server can still see.</h3>
+      <p>
+        A privacy app that only lists what it does not collect is asking to be
+        taken on faith. Anon counts the real number from the live store and
+        shows it to you.
+      </p>
+      <div class="ledger">
+        <div class="row">
+          <span>World ID nullifier</span>
+          <span class="val">Never written</span>
+        </div>
+        <div class="row">
+          <span>Ballots</span>
+          <span class="val">Keyed per poll</span>
+        </div>
+        <div class="row">
+          <span>Linked Surrogates</span>
+          <span class="val kept">A real link</span>
+        </div>
+        <div class="row">
+          <span>Sealed Surrogates</span>
+          <span class="val">Not groupable at all</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>
+    Anon is an independent prototype. It is not affiliated with, endorsed by,
+    or operated by World, Tools for Humanity, or the World Foundation.
+  </p>
+  <p>
+    Source: <a href="https://github.com/billchenxi/anon">github.com/billchenxi/anon</a>
+    &middot; Built with World ID 4.0 and MiniKit.
+  </p>
+</footer>
 
 </body>
 </html>
